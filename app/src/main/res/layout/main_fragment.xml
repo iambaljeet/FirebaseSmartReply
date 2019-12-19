@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainFragment">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextUser1Message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Local user message"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonUser1SendMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Send Message"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUser1Message"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextUser2Message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Remote user message"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUser1SendMessage"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonUser2SendMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Send Message"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUser2Message"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewSmartRepliesSuggestions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUser2SendMessage"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
