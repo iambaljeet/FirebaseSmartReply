@@ -3,15 +3,19 @@ package com.app.firebasesmartreply.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.firebasesmartreply.model.SmartReplyDataModel
-import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
+import com.google.firebase.ml.naturallanguage.smartreply.FirebaseSmartReply
 import com.google.firebase.ml.naturallanguage.smartreply.FirebaseTextMessage
 import com.google.firebase.ml.naturallanguage.smartreply.SmartReplySuggestionResult
 
 class MainViewModel : ViewModel() {
     private val smartRepliesLiveData = MutableLiveData<SmartReplyDataModel>()
-    private val smartReply = FirebaseNaturalLanguage.getInstance().smartReply
+    private var smartReply: FirebaseSmartReply? = null
 
     private val firebaseTextMessage: MutableList<FirebaseTextMessage> = mutableListOf()
+
+    fun initSmartReply(smartReply: FirebaseSmartReply) {
+        this.smartReply = smartReply
+    }
 
     fun addLocalUserMessage(userMessage: String) {
         firebaseTextMessage.add(FirebaseTextMessage.createForLocalUser(
@@ -30,8 +34,8 @@ class MainViewModel : ViewModel() {
 
     private fun getFirebaseSmartReply() {
         if (firebaseTextMessage.isNotEmpty()) {
-            smartReply.suggestReplies(firebaseTextMessage)
-                .addOnSuccessListener { smartReplySuggestionResult ->
+            smartReply?.suggestReplies(firebaseTextMessage)
+                ?.addOnSuccessListener { smartReplySuggestionResult ->
                     val smartReplyDataModel = when (smartReplySuggestionResult.status) {
                         SmartReplySuggestionResult.STATUS_SUCCESS -> {
                             SmartReplyDataModel(isSuccess = true, isException = false,
@@ -49,7 +53,7 @@ class MainViewModel : ViewModel() {
                     }
                     smartRepliesLiveData.postValue(smartReplyDataModel)
                 }
-                .addOnFailureListener { exception ->
+                ?.addOnFailureListener { exception ->
                     val smartReplyDataModel = SmartReplyDataModel(
                         isSuccess = false,
                         isException = true,

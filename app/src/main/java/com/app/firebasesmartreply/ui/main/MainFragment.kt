@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.app.firebasesmartreply.R
+import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment(), View.OnClickListener {
@@ -16,6 +17,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private lateinit var viewModel: MainViewModel
+    private var smartReply = FirebaseNaturalLanguage.getInstance().smartReply
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -25,6 +27,8 @@ class MainFragment : Fragment(), View.OnClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        viewModel.initSmartReply(smartReply)
 
         val firebaseSmartReplyLiveData = viewModel.getSmartRepliesLiveData()
 
